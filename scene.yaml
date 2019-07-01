@@ -142,10 +142,10 @@ layers:
                             return [1,1,0,0.7]
                             }
                         if (feature.mag == 2){
-                            return [.5,1,0,0.7]
+                            return [.5,1,0,0.5]
                             }
                         if (feature.mag == 1){
-                            return [0,1,0,0.7]
+                            return [0,1,0,0.0]
                             }
                         }
                 # color: [1,0,0,0.5]
