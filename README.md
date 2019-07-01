@@ -20,7 +20,7 @@ data via https://www.spc.noaa.gov/gis/svrgis/
 
 ![](https://github.com/burritojustice/noaa_historic_tornadoes/blob/master/tornado%20hexbins%20demo/hexbin%20centroids%209.png)
 
-![](https://github.com/burritojustice/noaa_historic_tornadoes/blob/master/tornado%20hexbins%20demo/hexbin%20centroids%210.png)
+![](https://github.com/burritojustice/noaa_historic_tornadoes/blob/master/tornado%20hexbins%20demo/hexbin%20centroids%2010.png)
 
-![](https://github.com/burritojustice/noaa_historic_tornadoes/blob/master/tornado%20hexbins%20demo/hexbin%20centroids%211.png)
+![](https://github.com/burritojustice/noaa_historic_tornadoes/blob/master/tornado%20hexbins%20demo/hexbin%20centroids%2011.png)
 
