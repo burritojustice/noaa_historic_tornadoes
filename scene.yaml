@@ -169,9 +169,10 @@ layers:
                             mag = feature.mag
                             console.log(mag)
                             }
-                        // return mag + 100
-                        return mag * 2 + 2
-                        // var zoom = $zoom.
+                        mag = mag * 2 + 2
+                        if ($zoom > 11){mag = 16}
+                        return mag 
+                        // var zoom = $zoom
                         // var size = zoom/2 + mag
                         // console.log(mag,zoom,size)
                         // return size
