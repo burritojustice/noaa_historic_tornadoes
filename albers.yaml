@@ -11,6 +11,11 @@ global:
     access_token: AS5fV38SlsAWy5busf3eizY #ALqnbtEI8h0VONQwJgBcn3Y
     order: function () { return feature.sort_key; }
     basemap: false
+    
+ scene:
+     background:
+         color: black
+
 sources:
     mapzen: #xyz-osm
         type: MVT
