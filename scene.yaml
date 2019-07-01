@@ -24,20 +24,24 @@ lights:
 
 sources:
     _xyzspace:
+        # url: https://xyz.api.here.com/hub/spaces/uEkuuLXY/tile/quadkey/0302222
         url: https://xyz.api.here.com/hub/spaces/maP1Z7fj/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             clip: true
     _tracks:
         url: https://xyz.api.here.com/hub/spaces/qCRDnZbf/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             # clip: true 
     _z2:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom2_centroid
@@ -45,6 +49,7 @@ sources:
     _z3:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom3_centroid
@@ -53,6 +58,7 @@ sources:
     _z4:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom4_centroid
@@ -61,6 +67,7 @@ sources:
     _z5:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom5_centroid
@@ -69,6 +76,7 @@ sources:
     _z5_hexbin:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom5_hexbin
@@ -77,6 +85,7 @@ sources:
     _z6:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom6_centroid
@@ -85,6 +94,7 @@ sources:
     _z6_hexbin:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom6_hexbin
@@ -93,6 +103,7 @@ sources:
     _z7_hexbin:
         url: https://xyz.api.here.com/hub/spaces/uFjNTqGV/tile/web/{z}_{x}_{y}
         type: GeoJSON
+        # max_zoom: 13
         url_params: 
             access_token: AVoxWfIDYgZOr4zOaUV3urg
             tags: zoom7_hexbin
@@ -122,7 +133,7 @@ styles:
     _polygons_overlay:
         base: polygons
         blend: overlay
-        blend_order: 1
+        blend_order: 0
         
 layers:
     buildings:
@@ -137,6 +148,7 @@ layers:
         data: {source: _xyzspace}
         draw:
             points:
+                blend_order: -10
                 collide: false
                 color: |
                     function(){
@@ -162,6 +174,10 @@ layers:
                         }
                 # color: [1,0,0,0.5]
                 size: [[8,5px],[10,12px]]
+                # size: |
+                #     function(){
+                #         var mag = feature.mag +100
+                #     }
                 size: |
                     function(){
                         var mag = 1
@@ -169,10 +185,11 @@ layers:
                             mag = feature.mag
                             console.log(mag)
                             }
+                        // return mag + 100
                         mag = mag * 2 + 2
                         if ($zoom > 11){mag = 16}
                         return mag 
-                        // var zoom = $zoom
+                        // var zoom = $zoom.
                         // var size = zoom/2 + mag
                         // console.log(mag,zoom,size)
                         // return size
@@ -201,7 +218,7 @@ layers:
         data: {source: _tracks}
         # filter: {kind: point}
         draw:
-            _lines:
+            lines:
                 color: |
                     function(){
                         if ((feature.mag == 5) && ($zoom > 7)){
@@ -224,6 +241,7 @@ layers:
                             return [0,.4,.75]
                             }
                         }
+                # color: red
                 # width: 4px
                 width: [[5,1px],[10,2px]]
                 outline:
@@ -232,6 +250,11 @@ layers:
 
                     width: .075px
                 order: 2000
+                # size: 5px
+                # size: |
+                #     function(){
+                #         return 30 - (feature.scalerank * 4)
+                #         }
             text:
                 # text_source: yr
                 text_source: |
@@ -367,6 +390,7 @@ layers:
                         var color
                         if (feature.color){
                             color = feature.color
+                            color = color.replace(/0.51/,".9")
                             }
                         else{color = [1,0,0,0.75]}
                         return color
@@ -385,6 +409,7 @@ layers:
                         var color
                         if (feature.color){
                             color = feature.color
+                            color = color.replace(/0.51/,".9")
                             }
                         else{color = [1,0,0,0.75]}
                         return color
@@ -397,12 +422,13 @@ layers:
         data: {source: _z4}
         draw:
             points:
-                blend_order: 100
+                # blend_order: 10
                 color: |
                     function(){
                         var color
                         if (feature.color){
                             color = feature.color
+                            color = color.replace(/0.51/,".8")
                             }
                         else{color = [1,0,0,0.75]}
                         return color
@@ -415,12 +441,13 @@ layers:
         data: {source: _z5}
         draw:
             points:
-                blend_order: 10
+                blend_order: -1
                 color: |
                     function(){
                         var color
                         if (feature.color){
                             color = feature.color
+                            color = color.replace(/0.51/,".8")
                             }
                         else{color = [1,0,0,0.75]}
                         return color
@@ -454,14 +481,14 @@ layers:
             # enabled: false
             # extrude: function() { return feature.count * 20}
             draw:
-                _lines:
+                lines:
                     # collide: false
-                    color: [1,1,1]
+                    color: [1,1,1,.5]
                     width: .5px
-                    order: 2000
+                    order: 100
         draw:
             # polygons:
-            _polygons_inlay:
+            _polygons_overlay:
                 # collide: false
                 # color:  [1,0,1,0.3]
                 color: |
@@ -473,7 +500,7 @@ layers:
                         else{color = [1,0,0,0.75]}
                         return color
                         }
-                order: 1004
+                order: 99
     _z6_hexbin:
         enabled: false
         data: {source: _z6_hexbin}
@@ -487,7 +514,7 @@ layers:
                     # collide: false
                     color: [1,1,1]
                     width: .5px
-                    order: 2000
+                    order: -1
         draw:
             # polygons:
             _polygons_inlay:
@@ -502,7 +529,7 @@ layers:
                         else{color = [1,0,0,0.75]}
                         return color
                         }
-                order: 1004
+                order: 1
                 # extrude: function() {return feature.count * 50}         
             # text:
             #     text_source: count
