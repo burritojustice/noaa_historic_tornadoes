@@ -12,9 +12,9 @@ global:
     order: function () { return feature.sort_key; }
     basemap: false
     
- scene:
-     background:
-         color: black
+scene:
+    background:
+        color: black
 
 sources:
     mapzen: #xyz-osm
